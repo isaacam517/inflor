@@ -1,7 +1,11 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link>
-    <!-- <router-link to="/detalhes-do-personagem">About</router-link> -->
+    <span>
+      <h1>Desafio INFLOR</h1>
+    </span>
+    <span>
+      <router-link to="/">Início</router-link>
+    </span>
   </nav>
   <router-view/>
 </template>
@@ -14,21 +18,30 @@
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  padding: 0;
+  overflow-x: hidden;
+  margin: 0;
+  height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  background-image: url("https://cdn.wallpapersafari.com/41/16/IOmeDP.jpg");
+
 }
 nav {
   padding: 30px;
-
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: #fff;
+    text-decoration: none;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: #fff;
     }
   }
 }

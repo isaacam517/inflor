@@ -1,41 +1,33 @@
 <template>
 <div class="basket">
     <div class="items">
-
       <template v-if="detailsPeople">
         <div class="item">
-          <div class="photo">
-            <img src="" alt="">
+          <div class="people-image" :style="{backgroundImage: 'url(https://picsum.photos/200/300)'}"></div>
+          <div class="description"><strong>NOME : </strong> <span class="nome">{{this.detailsPeople.name}}</span> </div>
+          <div class="description"><strong>IDADE : </strong> <span>{{this.detailsPeople.birth_year}}</span> </div>
+          <div class="description"><strong>ALTURA :  </strong> <span>{{this.detailsPeople.height}}cm</span> </div>
+          <div class="description"><strong>PESO : </strong> <span>{{this.detailsPeople.mass}}kg</span> </div>
+          <div class="description"><strong>Naves Estelares : </strong> <span>{{this.detailsPeople.starships.length}}</span> </div>
+          <div class="ships">
+            <span v-for="(ship, index) in detailsPeople.starships" :key="index">
+              <button @click="this.startShipUrl=ship">Nave {{index+1}}</button>
+            </span>
           </div>
-          <div class="description">NOME : {{this.detailsPeople.name}}</div>
-          <div class="description">IDADE : {{this.detailsPeople.birth_year}}</div>
-          <div class="description">ALTURA : {{this.detailsPeople.height}}cm</div>
-          <div class="description">PESO : {{this.detailsPeople.mass}}kg</div>
-          <div class="description">Naves Estelares : {{this.detailsPeople.starships.length}}</div>
-          <div v-for="(ship, index) in detailsPeople.starships" :key="index" class="price">
-            <button @click="this.startShipUrl=ship">Nave {{index+1}}</button>
-          </div>
-        </div> 
         <template v-if="detailsOfShip">
           <div class="grand-total"> Detalhes da Nave </div>
-          <div class="description">Nome da Nave : {{this.detailsOfShip.name}}</div>
-          <div class="description">Capacidade de Carga : {{this.detailsOfShip.cargo_capacity}}</div>
-          <div class="description">Tripulação : {{this.detailsOfShip.crew}}</div>
-          <div class="description">Comprimento : {{this.detailsOfShip.length}}M</div>
-          <div class="description">Passageiros : {{this.detailsOfShip.passengers}}</div>
-          <div class="description">Classe : {{this.detailsOfShip.starship_class}}</div>
-          <div class="description">Modelo : {{this.detailsOfShip.model}}</div>
-          <div class="description">Fabricante : {{this.detailsOfShip.manufacturer}}</div>
-          <div class="description">velocidade máxima de atmosfera : {{this.detailsOfShip.max_atmosphering_speed}}Mph</div>
+          <div class="description-ship">Nome da Nave : <span>{{this.detailsOfShip.name}}</span> </div>
+          <div class="description-ship">Capacidade de Carga : {{this.detailsOfShip.cargo_capacity}}</div>
+          <div class="description-ship">Tripulação : {{this.detailsOfShip.crew}}</div>
+          <div class="description-ship">Comprimento : {{this.detailsOfShip.length}}M</div>
+          <div class="description-ship">Passageiros : {{this.detailsOfShip.passengers}}</div>
+          <div class="description-ship">Classe : {{this.detailsOfShip.starship_class}}</div>
+          <div class="description-ship">Modelo : {{this.detailsOfShip.model}}</div>
+          <div class="description-ship">Fabricante : {{this.detailsOfShip.manufacturer}}</div>
+          <div class="description-ship">velocidade máxima de atmosfera : {{this.detailsOfShip.max_atmosphering_speed}}Mph</div>
         </template>
-        <!-- <template v-else>
-          <h4>Carrinho Vazio</h4>
-        </template>  -->
+        </div> 
       </template>
-      <template v-else>
-        <h4>.</h4>
-      </template>
-
     </div>
   </div>
 </template>
@@ -52,17 +44,13 @@ export default {
     detailsOfShip: undefined
   }),
   mounted() {
-    
     this.url = JSON.parse(localStorage.getItem("detailsUrl"))
-
-    
     },
   methods:{
     getDetails() {
       this.axios
       .get(this.url)
       .then(res => {
-        console.log(res.data)
         this.detailsPeople = res.data;
       });
     },
@@ -70,7 +58,6 @@ export default {
       this.axios
       .get(this.startShipUrl)
       .then(res => {
-        console.log(res.data)
         this.detailsOfShip = res.data;
       });
     },
@@ -82,7 +69,6 @@ export default {
     startShipUrl () {
       this.detailsShip()
     },
-
   },
   mixins: [mixin],
 }
@@ -96,11 +82,15 @@ export default {
     max-width: 800px;
     margin: auto;
     .item {
+      box-sizing: border-box;  
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      background-color: #DCDCDC;
+      padding: 16px;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      justify-content: center;
       padding: 40px 0;
       border-bottom: 1px solid lightgrey;
-      position: relative;
 
       .remove {
         position: absolute;
@@ -130,32 +120,71 @@ export default {
         }
       }
 
-      .photo {
-        img {
-          max-width: 80px;
-        }
+      .people-image {
+        margin: 20px auto;
+        width: 300px;
+        height: 200px;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
       }
 
       .description {
+        margin: 8px auto;
         padding-left: 30px;
         box-sizing: border-box;
-        max-width: 50%;
+        span {
+          color: red;
+          font-size: 16px;
+          font-weight: 600;
+        }
+        span.nome {
+          color: red;
+          font-size: 20px;
+          font-weight: 700;
+        }
 
       }
-
-      .price {
-        .amount {
+      .description-ship {
+        margin: 5px auto;
+        box-sizing: border-box;
+        span {
+          color: red;
           font-size: 16px;
-          margin-left: 8px;
-          vertical-align: middle;
+          font-weight: 600;
+        }
+      }
 
+      .ships {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        button {
+          color: #fff;
+          background-color: #4B0082;
+          border: 1px solid #4B0082;
+          border-radius: 100px;
+          font-weight: 400;
+          text-align: center;
+          margin: 20px 20px;
+          padding: 16px 32px;
+          cursor: pointer;
+
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+
+        @media only screen and (max-width: 720px) {
+          flex-direction: column;
+          flex: 0 0 90%;
         }
       }
     }
       .grand-total {
           font-size: 24px;
           font-weight: bold;
-          text-align: right;
+          text-align: center;
           margin-top: 8px;
       }
 
