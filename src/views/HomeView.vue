@@ -9,7 +9,7 @@
         </div>
         <h4 class="people-name">{{people.name}}</h4>
         <p >Ano de Nascimento: {{people.birth_year}}</p>
-        <button @click="this.baseUlr=people.url">Detalhes</button>
+        <button @click="this.detailsUrl=people.url">Detalhes</button>
       </div>
     </div>
     <button v-if="peoples.previous"
@@ -126,8 +126,4 @@ export default {
       }
   }
 
-
 </style>
-
-        <!-- :class="{ inBag : isInBag(people)}" -->
-
