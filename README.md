@@ -10,7 +10,7 @@
   5. README.md Criado.
   6. Responsividade Implementada.
   7. Paginação da API.
-  8. Disponibilidade em Cloud link =>
+  8. Disponibilidade em Cloud (Netlify) link => https://extraordinary-otter-6a0019.netlify.app/#/
 
   Obs.: Devido ao tempo não implementei a Api do Google para mostrar a imagem do personagem expecífico.
 ```

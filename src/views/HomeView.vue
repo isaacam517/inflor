@@ -61,7 +61,7 @@ export default {
         .people-image {
           margin: 20px auto;
           width: 160px;
-          height: 140px;
+          height: 120px;
           background-size: contain;
           background-position: center;
           background-repeat: no-repeat;
@@ -76,7 +76,6 @@ export default {
         p {
           margin: 2px auto;
           font-size: 12px;
-          max-width: 60%;
           font-weight: normal;
         }
 
